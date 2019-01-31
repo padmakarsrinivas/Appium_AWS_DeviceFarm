@@ -25,6 +25,9 @@ public class AndoridNativeAWSTest {
   @AndroidFindBy(accessibility = "Save")
   public MobileElement saveNote;
 
+  @AndroidFindBy(id = "android:id/text1")
+  public MobileElement firstListNote;
+
   @BeforeTest
   public void beforeTest( ) throws MalformedURLException {
     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -39,14 +42,10 @@ public class AndoridNativeAWSTest {
 
   @Test
   public void launchApp() {
-
     newNote.click();
     typeNote.sendKeys("New Note from test");
     saveNote.click();
-    //    mobiledriver.findElementByAccessibilityId("New note").click();
-    //    mobiledriver.findElementById("com.example.android.notepad:id/note").sendKeys("New Note from test");
-    //    mobiledriver.findElementByAccessibilityId("Save").click();
-    String noteName = mobiledriver.findElementById("android:id/text1").getText();
+    String noteName = firstListNote.getText();
     Assert.assertEquals(noteName, "New Note from test", "Name Mismatch");
   }
 }
