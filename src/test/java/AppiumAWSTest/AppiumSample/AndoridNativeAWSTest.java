@@ -41,9 +41,9 @@ public class AndoridNativeAWSTest {
   }
 
   @Test
-  public void launchApp() {
+  public void addNotes() {
     newNote.click();
-    typeNote.sendKeys("New Note from test");
+    typeNote.sendKeys("New Note from test !!!!!");
     saveNote.click();
     String noteName = firstListNote.getText();
     Assert.assertEquals(noteName, "New Note from test", "Name Mismatch");
