@@ -8,26 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class AndoridNativeAWSTest {
   public static AndroidDriver<?> mobiledriver;
-
-  @AndroidFindBy(accessibility = "New note")
-  public MobileElement newNote;
-
-  @AndroidFindBy(id = "com.example.android.notepad:id/note")
-  public MobileElement typeNote;
-
-  @AndroidFindBy(accessibility = "Save")
-  public MobileElement saveNote;
-
-  @AndroidFindBy(id = "android:id/text1")
-  public MobileElement firstListNote;
-
   @BeforeTest
   public void beforeTest( ) throws MalformedURLException {
     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -41,11 +25,11 @@ public class AndoridNativeAWSTest {
   }
 
   @Test
-  public void addNotes() {
-    newNote.click();
-    typeNote.sendKeys("New Note from test !!!!!");
-    saveNote.click();
-    String noteName = firstListNote.getText();
+  public void launchApp() {
+    mobiledriver.findElementByAccessibilityId("New note").click();
+    mobiledriver.findElementById("com.example.android.notepad:id/note").sendKeys("New Note from test");
+    mobiledriver.findElementByAccessibilityId("Save").click();
+    String noteName = mobiledriver.findElementById("android:id/text1").getText();
     Assert.assertEquals(noteName, "New Note from test", "Name Mismatch");
   }
 }
